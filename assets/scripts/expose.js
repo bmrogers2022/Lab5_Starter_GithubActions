@@ -8,6 +8,7 @@ function init() {
   var idk;
   const selectHorn = document.getElementById('horn-select');
 
+  // Why don't we add all the selectHorn event listeners together?
   selectHorn.addEventListener('change', (event) => {
     const image = document.querySelector("img");
     image.src = `assets/images/${event.target.value}.svg`;
@@ -29,34 +30,20 @@ function init() {
   volumeControls.addEventListener('change', (event) => {
     const icon = document.querySelector("img[alt='Volume level 2']");
     const volume = document.getElementById("volume");
-  
+    const bar_value = event.target.value;
+    const target_volume = bar_value / 100;
+    audio.volume = target_volume;
+    
     if (event.target.value == 0) {
       icon.src = "assets/icons/volume-level-0.svg";
-      audio.volume = 0;
+    } else if (event.target.value < 33) {
+      icon.src = "assets/icons/volume-level-1.svg";
+    } else if (event.target.value < 67) {
+      icon.src = "assets/icons/volume-level-2.svg";
+    } else {
+      icon.src = "assets/icons/volume-level-3.svg";
     }
-
-    if (event.target.value < 33) {
-        if (event.target.value > 0) {
-          icon.src = "assets/icons/volume-level-1.svg";
-          audio.volume = (event.target.value)/100;
-        }
-
-    }
-
-    if (event.target.value < 67) {
-      if (event.target.value > 32) {
-        icon.src = "assets/icons/volume-level-2.svg";
-        volume.value = (event.target.value)/100;
-      }
-    }
-
-    if (event.target.value > 66) {
-      if (event.target.value <= 100) {
-        icon.src = "assets/icons/volume-level-3.svg";
-        volume.value = (event.target.value)/100;
-      }
-
-    }
+    event.target.value = bar_value;
   });
 
   document.querySelector("button").onclick = function() {
