@@ -27,34 +27,34 @@ import {
   
     describe('Email Validation', () => {
       test('Accepts valid email', () => {
-        expect(isEmail('test@example.com')).toBe(true);
+        expect(isEmail('correct@example.com')).toBe(true);
       });
       test('Rejects invalid email', () => {
-        expect(isEmail('invalidemail')).toBe(false);
+        expect(isEmail('notvalidemail')).toBe(false);
       });
       test('Rejects email without "@" symbol', () => {
-        expect(isEmail('testexample.com')).toBe(false);
+        expect(isEmail('alsonotvalid.com')).toBe(false);
       });
     });
   
     describe('Password Strength Validation', () => {
       test('Accepts strong password', () => {
-        expect(isStrongPassword('StrongPassword123')).toBe(true);
+        expect(isStrongPassword('StrongPassword12#')).toBe(true);
       });
       test('Rejects weak password', () => {
-        expect(isStrongPassword('weak')).toBe(false);
+        expect(isStrongPassword('notstrong')).toBe(false);
       });
     });
 
     describe('Date Validation', () => {
       test('Accepts valid date', () => {
-        expect(isDate('2024-05-04')).toBe(true);
+        expect(isDate('2024-05-07')).toBe(true);
       });
       test('Rejects invalid date format', () => {
-        expect(isDate('May 4, 2024')).toBe(false);
+        expect(isDate('May 7, 2024')).toBe(false);
       });
       test('Rejects invalid date value', () => {
-        expect(isDate('2024-13-40')).toBe(false);
+        expect(isDate('2024-34-50')).toBe(false);
       });
     });
   
