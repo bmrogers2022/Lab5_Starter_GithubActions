@@ -26,18 +26,44 @@ import {
     });
   
     describe('Email Validation', () => {
-      
+      test('Accepts valid email', () => {
+        expect(isEmail('test@example.com')).toBe(true);
+      });
+      test('Rejects invalid email', () => {
+        expect(isEmail('invalidemail')).toBe(false);
+      });
+      test('Rejects email without "@" symbol', () => {
+        expect(isEmail('testexample.com')).toBe(false);
+      });
     });
   
     describe('Password Strength Validation', () => {
-      
+      test('Accepts strong password', () => {
+        expect(isStrongPassword('StrongPassword123')).toBe(true);
+      });
+      test('Rejects weak password', () => {
+        expect(isStrongPassword('weak')).toBe(false);
+      });
     });
 
     describe('Date Validation', () => {
-      
+      test('Accepts valid date', () => {
+        expect(isDate('2024-05-04')).toBe(true);
+      });
+      test('Rejects invalid date format', () => {
+        expect(isDate('May 4, 2024')).toBe(false);
+      });
+      test('Rejects invalid date value', () => {
+        expect(isDate('2024-13-40')).toBe(false);
+      });
     });
   
     describe('Hex Color Code Validation', () => {
-      
+      test('Accepts valid hex color code', () => {
+        expect(isHexColor('#ff0000')).toBe(true);
+      });
+      test('Rejects invalid hex color code', () => {
+        expect(isHexColor('#xyz123')).toBe(false);
+      });
     });
   });
