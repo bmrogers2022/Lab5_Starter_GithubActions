@@ -35,26 +35,38 @@ import {
       test('Rejects email without "@" symbol', () => {
         expect(isEmail('alsonotvalid.com')).toBe(false);
       });
+      test('Accepts gmails', () => {
+        expect(isEmail('valid@gmails.com')).toBe(true);
+      });
     });
   
     describe('Password Strength Validation', () => {
       test('Accepts strong password', () => {
-        expect(isStrongPassword('StrongPassword12#')).toBe(true);
+        expect(isStrongPassword('StrongPass12')).toBe(true);
       });
       test('Rejects weak password', () => {
-        expect(isStrongPassword('notstrong')).toBe(false);
+        expect(isStrongPassword('notstrongbecuaselength')).toBe(false);
+      });
+      test('Rejects weak password', () => {
+        expect(isStrongPassword('1a@1')).toBe(false);
+      });
+      test('Accepts strong password', () => {
+        expect(isStrongPassword('aaaaaaaaa')).toBe(true);
       });
     });
 
     describe('Date Validation', () => {
       test('Accepts valid date', () => {
-        expect(isDate('2024-05-07')).toBe(true);
+        expect(isDate('5/7/2004')).toBe(true);
       });
       test('Rejects invalid date format', () => {
         expect(isDate('May 7, 2024')).toBe(false);
       });
       test('Rejects invalid date value', () => {
-        expect(isDate('2024-34-50')).toBe(false);
+        expect(isDate('2024-12-12')).toBe(false);
+      });
+      test('Accepts old date', () => {
+        expect(isDate('10/10/1001')).toBe(true);
       });
     });
   
@@ -64,6 +76,12 @@ import {
       });
       test('Rejects invalid hex color code', () => {
         expect(isHexColor('#xyz123')).toBe(false);
+      });
+      test('Accepts valid hex color code', () => {
+        expect(isHexColor('#ffffff')).toBe(true);
+      });
+      test('Rects long hex color code', () => {
+        expect(isHexColor('#fffffff')).toBe(false);
       });
     });
   });
